@@ -110,62 +110,6 @@ def split_text_into_lines(data):
 
     return subtitles
 
-def split_text_into_lines(data):
-    MaxChars = 30
-    # maxduration in seconds
-    MaxDuration = 2.5
-    # Split if nothing is spoken (gap) for these many seconds
-    MaxGap = 0.5
-
-    subtitles = []
-    line = []
-    line_duration = 0
-
-    for idx, word_data in enumerate(data):
-        start = word_data["start"]
-        end = word_data["end"]
-
-        line.append(word_data)
-        line_duration += end - start
-
-        temp = " ".join(item["word"] for item in line)
-
-        # Check if adding a new word exceeds the maximum character count or duration
-        new_line_chars = len(temp)
-
-        duration_exceeded = line_duration > MaxDuration
-        chars_exceeded = new_line_chars > MaxChars
-        if idx > 0:
-            gap = word_data['start'] - data[idx-1]['end']
-            # print (word,start,end,gap)
-            maxgap_exceeded = gap > MaxGap
-        else:
-            maxgap_exceeded = False
-
-        if duration_exceeded or chars_exceeded or maxgap_exceeded:
-            if line:
-                subtitle_line = {
-                    "word": " ".join(item["word"] for item in line),
-                    "start": line[0]["start"],
-                    "end": line[-1]["end"],
-                    "textcontents": line
-                }
-                subtitles.append(subtitle_line)
-                line = []
-                line_duration = 0
-
-    if line:
-        subtitle_line = {
-            "word": " ".join(item["word"] for item in line),
-            "start": line[0]["start"],
-            "end": line[-1]["end"],
-            "textcontents": line
-        }
-        subtitles.append(subtitle_line)
-
-    return subtitles
-
-
 def create_caption(textJSON, framesize, font=TEXT_FONT, color='white', highlight_color=HIGHLIGHT_COLOR, stroke_color='black', stroke_width=3.5):
     full_duration = textJSON['end']-textJSON['start']
 
