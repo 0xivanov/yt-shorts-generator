@@ -335,7 +335,7 @@ def main():
     args = parser.parse_args()
 
     cut_video(args.start, PODCAST_VIDEO_PATH + args.videoName)
-    create_short(args.title, args.genre, PODCAST_VIDEO_PATH + args.videoName)
+    create_short(args.title, args.genre, VIDEO_WITH_SUBTITLES)
 
 if __name__ == "__main__":
     main()

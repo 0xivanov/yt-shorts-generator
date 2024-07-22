@@ -11,7 +11,6 @@ logging.basicConfig()
 logging.getLogger("faster_whisper").setLevel(logging.DEBUG)
 
 MAX_DURATION = 60
-VIDEOS_FOLDER = "downloads/"
 DONE_SHORTS_FOLDER = "shorts/"
 TEMP_AUDIO_FOLDER = "temp/audios/"
 
@@ -89,7 +88,6 @@ def if_folder_exist(folder_path):
 
 
 def create_folders():
-    if_folder_exist(VIDEOS_FOLDER)
     if_folder_exist(TEMP_AUDIO_FOLDER)
     if_folder_exist(JSON_CHUNKS_FOLDER)
     if_folder_exist(SONGS_FOLDER)
